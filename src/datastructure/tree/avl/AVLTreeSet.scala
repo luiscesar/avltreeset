@@ -26,7 +26,7 @@ sealed abstract class AVLTreeSet[T<%Ordered[T]](var h:Int) {
 
   protected def balance(t: AVLTreeSet[T]) : AVLTreeSet[T] = t match {
     case EmptyAVLTreeSet() => t
-    case NonEmptyAVLTreeSet(x,sf,l,r) if (sf == 0)=> t
+    case NonEmptyAVLTreeSet(x,sf,l,r) if (sf == 0) => t
     case NonEmptyAVLTreeSet(x,sf,l,r) if (sf == -1) => t
     case NonEmptyAVLTreeSet(x,sf,l,r) if (sf == 1)=> t
     case NonEmptyAVLTreeSet(x,sf1,NonEmptyAVLTreeSet(y,sf2,t1,t2),r) if ( (sf1 == -2) && (sf2 == -1) ) => t.rightRotation()
