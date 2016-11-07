@@ -6,6 +6,12 @@ object AVLTreeSet {
     case (x,y) if (x >= y) => x
     case _ => y
   }
+  
+  def apply[T<%Ordered[T]](args: T*): AVLTreeSet[T] = {
+    var result: AVLTreeSet[T] = new EmptyAVLTreeSet[T]()
+    if (args.length > 0) args.foreach { x => result = result+x  }
+    result 
+  }
 }
 
 sealed abstract class AVLTreeSet[T<%Ordered[T]](var h:Int) {
@@ -59,7 +65,7 @@ sealed abstract class AVLTreeSet[T<%Ordered[T]](var h:Int) {
 	
 }
 
-case class EmptyAVLTreeSet[T<%Ordered[T]]() extends AVLTreeSet[T](-1) {  
+private case class EmptyAVLTreeSet[T<%Ordered[T]]() extends AVLTreeSet[T](-1) {  
   override def toString = "["+h+"]"
   
 	def +(v:T):AVLTreeSet[T] = new NonEmptyAVLTreeSet[T](v,0,new EmptyAVLTreeSet[T](),new EmptyAVLTreeSet[T]()) 	
@@ -71,7 +77,7 @@ case class EmptyAVLTreeSet[T<%Ordered[T]]() extends AVLTreeSet[T](-1) {
 	def toList: List[T] = List[T]()
 }
 
-case class NonEmptyAVLTreeSet[T<%Ordered[T]](v:T,private var sf:Int,left:AVLTreeSet[T],right:AVLTreeSet[T]) extends AVLTreeSet[T](1+AVLTreeSet.max(left.h,right.h)) {   
+private case class NonEmptyAVLTreeSet[T<%Ordered[T]](v:T,private var sf:Int,left:AVLTreeSet[T],right:AVLTreeSet[T]) extends AVLTreeSet[T](1+AVLTreeSet.max(left.h,right.h)) {   
   override def toString = "[" +v+","+sf+","+h+","+left+","+right+ "]"
   
 	def depth:Int = 1+AVLTreeSet.max(left.h,right.h)
@@ -80,7 +86,7 @@ case class NonEmptyAVLTreeSet[T<%Ordered[T]](v:T,private var sf:Int,left:AVLTree
 	def nonEmpty:Boolean = true
 	
 	def toList: List[T] = this match {
-    case NonEmptyAVLTreeSet(x,_,l,r) => x::l.toList:::r.toList
+    case NonEmptyAVLTreeSet(x,_,l,r) => l.toList:::x::r.toList
   }
 
   def +(v:T): AVLTreeSet[T] = this match {

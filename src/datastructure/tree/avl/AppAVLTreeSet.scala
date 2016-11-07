@@ -1,7 +1,7 @@
 package datastructure.tree.avl
 
 object AppAVLTreeSet extends App {
-  val t1 = new EmptyAVLTreeSet[Int]();
+  val t1 = AVLTreeSet[Int]()
   val t2 = t1+1+2+3+4+5+6+7+8+9+10
   println(t2)
   println(t2.toList)
@@ -16,4 +16,8 @@ object AppAVLTreeSet extends App {
   println(t4.size)
   println(t4.contains(10))
   println(t4.contains(9))
+  val t5 = AVLTreeSet[Int](5,4,3,2,1)
+  println(t5)
+  println(t5.contains(5))
+  println(t5.toList)
 }
