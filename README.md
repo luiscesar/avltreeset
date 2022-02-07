@@ -2,7 +2,7 @@
 
 Abstract Data Type Set:
 
-        Lookup, Insert, Delete
+        Lookup (contains), Insert (+), Delete (-)
 
 
 Implemented with AVL Tree.
