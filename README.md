@@ -1,6 +1,6 @@
 "# avltreeset" 
 
-Abstract Data Type Ordered Set (Type with a total order relationship, <):
+Abstract Data Type Ordered Set (Abstract Data Type Set with a total order relationship, <):
 
         Lookup (contains), Insert (+), Delete (-)
 
